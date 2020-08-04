@@ -1,4 +1,5 @@
 #screen {
+    background-image: url("sky.jpg");
     background-color: rgba(197, 11, 11, 0.664);
     display: block;
     margin-left: auto;
