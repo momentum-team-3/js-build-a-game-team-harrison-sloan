@@ -1,7 +1,8 @@
 #screen {
+    background-color: rgba(197, 11, 11, 0.664);
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
-    
+
 }
