@@ -6,3 +6,9 @@
     border-radius: 10px;
 
 }
+
+body {
+    text-align: center;
+    background-color: rgb(61, 56, 56);
+    color: white;
+}
