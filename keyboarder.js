@@ -12,6 +12,15 @@ const Keyboarder = {
   }
 }
 
+let player = makeRectangle(400,400,50,50,CHARTREUSE,true)
+function drawRect (x,y,width,height,color) {
+  let ctx = getContext();
+
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, width, height);
+
+
+
 window.addEventListener('keydown', function (e) {
   Keyboarder.keyState[e.keyCode] = true
 })
