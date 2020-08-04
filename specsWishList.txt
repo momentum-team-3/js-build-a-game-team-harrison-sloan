@@ -1,0 +1,10 @@
+Features wish list: 
+
+-Rotatable avatar for shooting, spacebar to shoot
+-Comic sans letters increasing in amount that appear on screen if you don’t shoot them off
+-Scoreboard 
+-Audio for shots and for intro
+-Title screen with Star Wars style scrolling screen
+-ability to choose font for avatar from a couple choices
+
+
