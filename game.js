@@ -2,6 +2,7 @@ const canvas = document.querySelector("#canvas");
 const WIDTH = canvas.width;
 const HEIGHT = canvas.height;
 const WHITE = "rgb(255, 255, 255)";
+let animationID; 
 /*
 const RED = "rgb(255, 0, 0)";
 const MINXPOSITION = 0;
@@ -18,7 +19,7 @@ function makeRectangle (x,y,height,width,color, isPlayer) {
         yUPPER: HEIGHT - height,
         xLower: 0,
         YLower: 0,
-        color:color,
+        color: color,
         isPlayer: isPlayer,
     }
 }
@@ -36,7 +37,15 @@ function drawRect(x,y,width,height,color) {
     ctx.fillStyle = color;
     ctx.fillRect(x,y,width,height);
 }
-/*
+
+drawRect(player.x, player.y, player.width, player.height, player.color);
+
+
+function clearScreen() {
+    let context = getContext();
+    context.clearRect(0,0,WIDTH,HEIGHT);
+}
+
 function keyPressListener (event) {
     if (event.key === "ArrowUp") {
         player.y -= 10
@@ -63,10 +72,13 @@ function keyPressListener (event) {
 
 
 function drawFrame () {
+    clearScreen();
     drawRect(player.x, player.y, player.width, player.height, player.color);
 }
 
 
 window.addEventListener("keydown", keyPressListener);
+document.querySelector("#start-button").addEventListener("click", () => animationID = window.setInterval(drawFrame, 20))
+document.querySelector("#stop-button").addEventListener("click", () => window.clearInterval(animationID))
 
-*/
+

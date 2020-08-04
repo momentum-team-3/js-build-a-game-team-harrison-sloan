@@ -22,3 +22,7 @@ body {
 p {
     font-style: italic;
 }
+
+main {
+    text-align: center;
+}
