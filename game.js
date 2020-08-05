@@ -57,6 +57,8 @@ function clearScreen() {
     context.clearRect(0,0,WIDTH,HEIGHT);
 }
 
+function updateBadGuyPosition
+
 //lets you move left and right
 function keyPressListener (event) {
     if (event.key === "ArrowRight" && player.x < 455) {
@@ -67,7 +69,7 @@ function keyPressListener (event) {
     }
 }
 
-//creates frame by frame 
+//creates frame by frame erasing screen each time so no trailing
 function drawFrame () {
     clearScreen();
     drawRect(player.x, player.y, player.width, player.height, player.color);
