@@ -75,6 +75,7 @@ function keyPressListener (event) {
     }
     else if (event.key === " ") {
         // Adding blaster
+        drawRect(blaster.x, blaster.y, blaster.width, blaster.height, blaster.color);
     }
 }
 
@@ -88,7 +89,9 @@ function drawFrame() {
          document.querySelector("#score").innerHTML += 1 
          updateBadGuyPosition(); 
         }*/
-        
+    //need to draw blaster IF there is a blaster, but NOT if there is no blaster. later
+    //we account for edge case of multiple shots of blaster in frame at once
+    drawRect(blaster.x, blaster.y, blaster.width, blaster.height, blaster.color); 
     drawRect(badGuy.x, badGuy.y, badGuy.width, badGuy.height, badGuy.color);
     
 }
@@ -99,3 +102,12 @@ document.querySelector("#start-button").addEventListener("click", () => animatio
 document.querySelector("#stop-button").addEventListener("click", () => window.clearInterval(animationID))
 
 
+
+
+
+
+//couple of glitches to work out with will/tomorrow:
+//1) speeds up each time you press start, need to limit to one
+//2) slows down if you press stop until stops, allows multiple also
+//3) blaster fires on start button, not on spacebar
+//4) cant play multiple games unless refresh browser each time (handle w alert?)
