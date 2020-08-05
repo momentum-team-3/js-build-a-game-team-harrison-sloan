@@ -7,4 +7,9 @@ Features wish list:
 -Title screen with Star Wars style scrolling screen
 -ability to choose font for avatar from a couple choices
 
+steps left
+
+-first may make more sense to get multiple enemies which may
+reveal solution for getting multiple blasters to go off 
+
 

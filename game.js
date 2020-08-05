@@ -13,10 +13,6 @@ function makeRectangle (x,y,height,width,color, isPlayer) {
         y:y,
         height:height,
         width:width,
-        xUpper: WIDTH - width,
-        yUPPER: HEIGHT - height,
-        xLower: 0,
-        YLower: 0,
         color: color,
         isPlayer: isPlayer,
     }
@@ -28,7 +24,7 @@ let player = makeRectangle(250,460,30,30,WHITE,true)
 let badGuy = makeRectangle(randomInteger(30, 470), 40, 30, 30,RED,false)
 // Blaster BABY!!!
 let blaster = makeRectangle(player.x, player.y, 5, 5, GREEN, false)
-//helper function to randomize for badGuy spawns
+//helper function to randomize for badGuy spawn location
 function randomInteger(min, max) {
     let range = max - min + 1
     let randomized = Math.floor(Math.random() * range)
@@ -75,7 +71,8 @@ function keyPressListener (event) {
     }
     else if (event.key === " ") {
         // Adding blaster
-        drawRect(blaster.x, blaster.y, blaster.width, blaster.height, blaster.color);
+        //drawRect(blaster.x, blaster.y, blaster.width, blaster.height, blaster.color);
+        blaster;
     }
 }
 
@@ -89,8 +86,8 @@ function drawFrame() {
          document.querySelector("#score").innerHTML += 1 
          updateBadGuyPosition(); 
         }*/
-    //need to draw blaster IF there is a blaster, but NOT if there is no blaster. later
-    //we account for edge case of multiple shots of blaster in frame at once
+    //may need to draw blaster IF there is a blaster, but NOT if there is no blaster. 
+    //later we account for edge case of multiple shots of blaster in frame at once
     drawRect(blaster.x, blaster.y, blaster.width, blaster.height, blaster.color); 
     drawRect(badGuy.x, badGuy.y, badGuy.width, badGuy.height, badGuy.color);
     
@@ -100,11 +97,6 @@ function drawFrame() {
 window.addEventListener("keydown", keyPressListener);
 document.querySelector("#start-button").addEventListener("click", () => animationID = window.setInterval(drawFrame, 20))
 document.querySelector("#stop-button").addEventListener("click", () => window.clearInterval(animationID))
-
-
-
-
-
 
 //couple of glitches to work out with will/tomorrow:
 //1) speeds up each time you press start, need to limit to one
