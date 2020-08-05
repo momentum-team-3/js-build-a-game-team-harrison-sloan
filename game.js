@@ -57,7 +57,9 @@ function clearScreen() {
     context.clearRect(0,0,WIDTH,HEIGHT);
 }
 
-function updateBadGuyPosition
+function updateBadGuyPosition() {
+    badGuy.y += 3
+}
 
 //lets you move left and right
 function keyPressListener (event) {
@@ -70,10 +72,17 @@ function keyPressListener (event) {
 }
 
 //creates frame by frame erasing screen each time so no trailing
-function drawFrame () {
+function drawFrame() {
     clearScreen();
     drawRect(player.x, player.y, player.width, player.height, player.color);
+    updateBadGuyPosition(); 
+   /* if   (badGuy.y >= 470 || badGuy.y <=472) {
+         document.querySelector("#score").innerHTML += 1 
+         updateBadGuyPosition(); 
+        }*/
+        
     drawRect(badGuy.x, badGuy.y, badGuy.width, badGuy.height, badGuy.color);
+    
 }
 
 //allows for gameplay to start and stop, and movement listener
