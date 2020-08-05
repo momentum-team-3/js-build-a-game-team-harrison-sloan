@@ -4,6 +4,7 @@ const HEIGHT = canvas.height;
 const WHITE = "rgb(255, 255, 255)";
 let animationID; 
 const RED = "rgb(255, 0, 0)";
+const GREEN = "rgb(51, 255, 0)";
 
 //this makes any rectangle, whether player or bad guy (may also include bullets when we get there)
 function makeRectangle (x,y,height,width,color, isPlayer) {
@@ -25,7 +26,8 @@ function makeRectangle (x,y,height,width,color, isPlayer) {
 let player = makeRectangle(250,460,30,30,WHITE,true)
 //will change later to make randomized along y =5 and x = random between 0 and 500
 let badGuy = makeRectangle(randomInteger(30, 470), 40, 30, 30,RED,false)
-
+// Blaster BABY!!!
+let blaster = makeRectangle(player.x, player.y, 5, 5, GREEN, false)
 //helper function to randomize for badGuy spawns
 function randomInteger(min, max) {
     let range = max - min + 1
@@ -60,7 +62,9 @@ function clearScreen() {
 function updateBadGuyPosition() {
     badGuy.y += 3
 }
-
+function updateBlasterPosition() {
+    blaster.y -= 6
+}
 //lets you move left and right
 function keyPressListener (event) {
     if (event.key === "ArrowRight" && player.x < 455) {
@@ -69,6 +73,9 @@ function keyPressListener (event) {
     else if (event.key === "ArrowLeft" && player.x > 5) {
         player.x -= 13
     }
+    else if (event.key === " ") {
+        // Adding blaster
+    }
 }
 
 //creates frame by frame erasing screen each time so no trailing
@@ -76,6 +83,7 @@ function drawFrame() {
     clearScreen();
     drawRect(player.x, player.y, player.width, player.height, player.color);
     updateBadGuyPosition(); 
+    updateBlasterPosition();
    /* if   (badGuy.y >= 470 || badGuy.y <=472) {
          document.querySelector("#score").innerHTML += 1 
          updateBadGuyPosition(); 
