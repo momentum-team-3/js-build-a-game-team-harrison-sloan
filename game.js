@@ -25,15 +25,6 @@ function makeRectangle (x,y,height,width,color, charType) {
     }
 }
 
-<<<<<<< HEAD
-//initializes the player
-let player = makeRectangle(250,460,30,30,WHITE, GOODGUY)
-//will change later to make randomized along y =5 and x = random between 0 and 500
-let badGuy = makeRectangle(randomInteger(30, 470), 40, 30, 30,RED, BADGUY)
-// Blaster BABY!!!
-let blaster = makeRectangle(player.x, player.y, 5, 5, GREEN, BLASTER)
-=======
->>>>>>> e4b36c72b2f74b2ea828c3046198b9ce687bd895
 //helper function to randomize for badGuy spawn location
 function randomInteger(min, max) {
     let range = max - min + 1
