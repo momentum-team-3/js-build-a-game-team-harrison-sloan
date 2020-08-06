@@ -1,6 +1,7 @@
 #canvas {
     border-style: groove;
     border-width: 15px;
+    border-color: slategrey;
     background-image: url("sky.jpg");
     background-size: cover;
     display: block;
@@ -16,8 +17,15 @@
 body {
     font-family: sans-serif;
     text-align: center;
-    background-color: rgb(61, 56, 56);
+    background-image: url("space-back.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
     color: white;
+}
+
+header {
+    color: chartreuse;
 }
 
 button {
