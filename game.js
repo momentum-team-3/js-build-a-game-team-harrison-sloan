@@ -13,7 +13,7 @@ var playerDX = 0;
 Score = 0;
 
 
-//this makes any rectangle, whether player or bad guy (may also include bullets when we get there)
+//this makes our objects, which have type player, bad guy, or blaster, spec'd by charType
 function makeRectangle (x,y,height,width,color, charType) {
     return {
         x:x,
@@ -38,7 +38,7 @@ function getContext() {
     
 }
 
-//makes new bad guys at set interval
+//makes new bad guys at set interval, increase number to increase difficulty
 function spawnBadGuy() {
     if (Math.random() < 0.005) {
     let bg = makeRectangle(randomInteger(30, 470), 40, 30, 30,RED,BADGUY);
@@ -47,7 +47,7 @@ function spawnBadGuy() {
 }
 
 
-//creates the rectangle within the context
+//creates the rectangle within the context (basically so it shows up on the canvas and can be interactive)
 function drawRect(rectangle) {
     let ctx = getContext();
 
@@ -62,13 +62,17 @@ function clearScreen() {
     context.clearRect(0,0,WIDTH,HEIGHT);
 }
 
+//allows for update of badGuy position, increase value to increase difficulty
 function updateBadGuyPosition(badGuy) {
     badGuy.y += 2;
 }
+
+//allows blaster to fire, decrease value to increase difficulty
 function updateBlasterPosition(blaster) {
     blaster.y -= 6;
 }
-//lets you move left and right
+
+//lets you move left and right and fire the blaster
 function keyPressListener (event) {
     if (event.key === "ArrowRight") {
         playerDX += 13;
@@ -77,14 +81,13 @@ function keyPressListener (event) {
         playerDX -= 13;
     }
     else if (event.key === " ") {
-        // Adding blaster
         let player = objects.find((o) => o.charType === "goodguy")
         let blaster = makeRectangle(player.x + 12.5, player.y - 2, 5, 5, GREEN, BLASTER);
         objects.push(blaster);        
     }
 }
 
-//creates frame by frame erasing screen each time so no trailing
+//updates the frame to simulate animation
 function drawFrame() {
     clearScreen();
     objectsLooper();
@@ -94,7 +97,7 @@ function drawFrame() {
     }
 }
 
-
+//allows player to move within defined range on canvas (no roll-overs from side to side)
 function updateGoodGuyPosition(object) {
     object.x += playerDX
     playerDX = 0
@@ -107,7 +110,7 @@ function updateGoodGuyPosition(object) {
 }
 
 
-//dispatcher for colliding objects
+//dispatcher for colliding objects, specs what f(x) runs depending on identities of colliding objects
 function handleCollision(object1, object2) {
     if (object1.charType === GOODGUY && object2.charType === BADGUY) {
         handleGoodGuyBadGuyCollision();
@@ -124,17 +127,12 @@ function handleCollision(object1, object2) {
     }
 }
 
+//ends game if the objects colliding have identities of good guy (player) and bad guy
 function handleGoodGuyBadGuyCollision() {
-    alert("GAME OVER. THE GALAXY HAS FALLEN PREY TO COMIC SANS.")
+    alert("GAME OVER. The Cubes Have Lost. Reload and Try Again.")
     tearDown()
 
 }
-
-
-
-
-
-
 
 //if a blaster hits a bad guy, it will remove both from the screen
 function handleBlasterBadGuyCollision(object1, object2) {
@@ -149,7 +147,7 @@ function removeFromArray(arr, obj) {
     arr.splice(arr.indexOf(obj), 1); 
     }
 
-//dispatcher for movement of the different objects
+//dispatcher for movement of the different objects, fires f(x) based on identity of object to update appropriate position
 function updatePosition(object) {
     if (object.charType === GOODGUY) {
         updateGoodGuyPosition(object);
@@ -163,7 +161,7 @@ function updatePosition(object) {
     }
 }
 
-//dispatcher for movement of the different objects
+//function to check if any 2 objects are colliding, checks every frame
 function isColliding(object1, object2) {
         if (object1.x < object2.x+object2.width && 
             object1.x + object1.width > object2.x && 
@@ -177,7 +175,8 @@ function isColliding(object1, object2) {
     }
 
 
-//updating things in the array
+//loops to update objects in our objects array. This is important so that when objects collide it can remove 
+//them from the array, which removes them from gameplay
 function objectsLooper() {
     for (let i = 0; i < objects.length; i++) {
         let currentObject = objects[i];
@@ -192,7 +191,7 @@ function objectsLooper() {
 
 
 
-//start the game
+//start the game. This is our master start 
 function startUp() {
     animationID = window.setInterval(drawFrame, 20);
     document.querySelector("#start-button").setAttribute("disabled", true);
@@ -200,7 +199,7 @@ function startUp() {
     objects.push(player);
     drawRect(player);
 }
-//stop the game
+//stop the game. This is our master stop
 function tearDown() {
     window.clearInterval(animationID);
     document.querySelector("#start-button").removeAttribute("disabled");
@@ -209,7 +208,7 @@ function tearDown() {
 }
 
 
-//allows for gameplay to start and stop, and movement listener
+//allows for gameplay to start and stop via input listeners
 window.addEventListener("keydown", keyPressListener);
 document.querySelector("#start-button").addEventListener("click", startUp);
 document.querySelector("#stop-button").addEventListener("click", tearDown);

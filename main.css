@@ -20,6 +20,12 @@ body {
     color: white;
 }
 
+button {
+    background-color: chartreuse;
+    border-width: 10px;
+    border-style: groove;
+}
+
 p {
     font-style: italic;
 }
